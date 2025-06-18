@@ -8,7 +8,7 @@
         <form action="{{ route('Search-Post') }}" method="get">
             @csrf
             <div class="input-group mb-3">
-                <input type="text" name="search" class="form-control" placeholder="Search posts...">
+                <input type="text" name="search" class="form-control" value="{{ request('search') }}" placeholder="Search posts...">
                 <button class="btn btn-outline-secondary" type="submit" name="submit">
                     <i class="fas fa-search"></i>
                 </button>

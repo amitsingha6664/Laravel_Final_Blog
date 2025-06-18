@@ -37,7 +37,9 @@ class AdminController extends Controller
 
     public function Search_Post(Request $request){
         $All_Post = Post::select('id', 'post_title', 'post_category', 'status', 'author_id', 'created_at')
-                         ->where('post_title', 'like', "%{$request->search}%")->get();
+                         ->where('post_title', 'like', "%{$request->search}%")->paginate(15);
+        $All_Category = Categories::select('id', 'category_name')->get();
+
         foreach($All_Post as $Post){
             $Category_Data = Categories::where('id', $Post->post_category)->first();
             $Post->Category_Name = $Category_Data->category_name;
@@ -48,22 +50,22 @@ class AdminController extends Controller
             $Post->User_Name = $User_Data->name;
         }
         $Post_Count = $All_Post->count();
-        return view('Backend.AllPostView', compact('All_Post', 'Post_Count'));
+        return view('Backend.AllPostView', compact('All_Post', 'Post_Count', 'All_Category'));
     }
 
     public function Post_Filter(Request $request){
 
         if($request->post_category == 'all' &&  $request->post_status == 'all'){
-            $All_Post = Post::select('id', 'post_title', 'post_category', 'status', 'author_id', 'created_at')->get();
+            $All_Post = Post::select('id', 'post_title', 'post_category', 'status', 'author_id', 'created_at')->paginate(15);
         }
         else if ($request->post_category == 'all' &&  $request->post_status != 'all') {
-            $All_Post = Post::select('id', 'post_title', 'post_category', 'status', 'author_id', 'created_at')->where('status', $request->post_status)->get();
+            $All_Post = Post::select('id', 'post_title', 'post_category', 'status', 'author_id', 'created_at')->where('status', $request->post_status)->paginate(15);
         }
         else if ($request->post_category != 'all' &&  $request->post_status == 'all') {
-            $All_Post = Post::select('id', 'post_title', 'post_category', 'status', 'author_id', 'created_at')->where('post_category', $request->post_category)->get();
+            $All_Post = Post::select('id', 'post_title', 'post_category', 'status', 'author_id', 'created_at')->where('post_category', $request->post_category)->paginate(15);
         }
         else {
-            $All_Post = Post::select('id', 'post_title', 'post_category', 'status', 'author_id', 'created_at')->where('status', $request->post_status)->where('post_category', $request->post_category)->get();
+            $All_Post = Post::select('id', 'post_title', 'post_category', 'status', 'author_id', 'created_at')->where('status', $request->post_status)->where('post_category', $request->post_category)->paginate(15);
         }
 
 
@@ -109,7 +111,7 @@ class AdminController extends Controller
     }
 
     public function Users_Post_Management_View(){
-        $User_Post = Post::where('status', 'pending')->get();
+        $User_Post = Post::where('status', 'pending')->paginate(15);
         $User_Post_Count = Post::where('status', 'pending')->count();
         foreach($User_Post as $Post){
             $User_Data = User::where('id', $Post->author_id)->first();
@@ -164,7 +166,7 @@ class AdminController extends Controller
     }
 
     public function Users_Management_View(){
-        $Users = User::select('id', 'name', 'role', 'email', 'created_at')->get();
+        $Users = User::select('id', 'name', 'role', 'email', 'created_at')->paginate(15);
         $User_Count = User::count();
         return view('Backend.UsersManagementView', compact('Users', 'User_Count'));
     }
