@@ -32,7 +32,8 @@ class AdminController extends Controller
         }
 
         $Post_Count = Post::count();
-        return view('Backend.AllPostView', compact('All_Post', 'Post_Count', 'All_Category'));
+        $result_text = "Total Posts";
+        return view('Backend.AllPostView', compact('All_Post', 'Post_Count', 'All_Category', 'result_text'));
     }
 
     public function Search_Post(Request $request){
@@ -50,22 +51,28 @@ class AdminController extends Controller
             $Post->User_Name = $User_Data->name;
         }
         $Post_Count = $All_Post->count();
-        return view('Backend.AllPostView', compact('All_Post', 'Post_Count', 'All_Category'));
+        $result_text = "Search: ".$request->search.' | Total Posts';
+        return view('Backend.AllPostView', compact('All_Post', 'Post_Count', 'All_Category', 'result_text'));
     }
 
     public function Post_Filter(Request $request){
 
         if($request->post_category == 'all' &&  $request->post_status == 'all'){
             $All_Post = Post::select('id', 'post_title', 'post_category', 'status', 'author_id', 'created_at')->paginate(15);
+            $result_text = 'Search: All Categorys && Status | Total Posts';
         }
         else if ($request->post_category == 'all' &&  $request->post_status != 'all') {
             $All_Post = Post::select('id', 'post_title', 'post_category', 'status', 'author_id', 'created_at')->where('status', $request->post_status)->paginate(15);
+            $result_text = 'Search: All Categorys | Total Posts';
         }
         else if ($request->post_category != 'all' &&  $request->post_status == 'all') {
             $All_Post = Post::select('id', 'post_title', 'post_category', 'status', 'author_id', 'created_at')->where('post_category', $request->post_category)->paginate(15);
+            $result_text = 'Search: All Post Status | Total Posts';
         }
         else {
             $All_Post = Post::select('id', 'post_title', 'post_category', 'status', 'author_id', 'created_at')->where('status', $request->post_status)->where('post_category', $request->post_category)->paginate(15);
+            $Category_Data = Categories::where('id', $request->post_category)->first();
+            $result_text = 'Search: '.$Category_Data->category_name.' & '.$request->post_status.' | Total Posts';
         }
 
 
@@ -82,7 +89,7 @@ class AdminController extends Controller
         }
 
         $Post_Count = Post::count();
-        return view('Backend.AllPostView', compact('All_Post', 'Post_Count', 'All_Category'));
+        return view('Backend.AllPostView', compact('All_Post', 'Post_Count', 'All_Category', 'result_text'));
     }
 
     public function Create_Post_View(){

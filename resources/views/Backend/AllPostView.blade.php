@@ -18,8 +18,7 @@
     <div class="col-md-4 mb-3">
         <div class="d-flex justify-content-between align-items-center text-light px-5 rounded-3" style="background: linear-gradient(to right, #2575fc, #6a11cb);">
             <h6>
-                <i class="fas fa-file-alt"></i>
-                <span>Total Posts</span>
+                <span>{{ $result_text}}</span>
             </h6>
             <h3>{{$Post_Count}}</h3>
         </div>
@@ -101,7 +100,7 @@
 </div>
 
 <!-- Pagination -->
-{{ $All_Post->links('pagination::bootstrap-5') }}
+{{ $All_Post->links('pagination::simple-bootstrap-5') }}
 
 @if(isset($Post->id))
 <!-- Delete Confirmation Modal -->
