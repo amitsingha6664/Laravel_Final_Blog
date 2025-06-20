@@ -21,12 +21,19 @@ Route::get('DashboardView', [AdminController::class, 'Dashboard_View'])->name('D
 Route::get('AllPostView', [AdminController::class, 'All_Post_View'])->name('All-Post-View');
 Route::get('SearchPost', [AdminController::class, 'Search_Post'])->name('Search-Post');
 Route::get('PostFilter', [AdminController::class, 'Post_Filter'])->name('Post-Filter');
+Route::get('RejectedPostView', [AdminController::class, 'Rejected_Post_View'])->name('Rejected-Post-View');
 Route::get('CreatePostView', [AdminController::class, 'Create_Post_View'])->name('Create-Post-View');
 Route::post('CreatePost', [AdminController::class, 'Create_Post'])->name('Create-Post');  /* New Post Create Routes */
+
 Route::get('UsersPostManagementView', [AdminController::class, 'Users_Post_Management_View'])->name('Users-Post-Management-View');
+Route::get('UserPostSearch', [AdminController::class, 'User_Post_Search'])->name('User-Post-Search');
+Route::post('UserPostAccept/{id}', [AdminController::class, 'User_Post_Accept'])->name('User-Post-Accept');
+Route::post('UserPostReject/{id}', [AdminController::class, 'User_Post_Reject'])->name('User-Post-Reject');
+
 Route::get('CategoriesManagementView', [AdminController::class, 'Categories_Management_View'])->name('Categories-Management-View');
 Route::post('AddNewCategory', [AdminController::class, 'Add_New_Category'])->name('Add-New-Category');
 Route::get('CategoryDelete/{id}', [AdminController::class, 'Category_Delete'])->name('Category-Delete');
+
 Route::get('CommentsManagementView', [AdminController::class, 'Comments_Management_View'])->name('Comments-Management-View');
 Route::get('UsersManagementView', [AdminController::class, 'Users_Management_View'])->name('Users-Management-View');
 Route::post('AddNewUser', [AdminController::class, 'Add_New_User'])->name('Add-New-User');

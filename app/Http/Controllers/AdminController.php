@@ -18,7 +18,7 @@ class AdminController extends Controller
     }
 
     public function All_Post_View(){
-        $All_Post = Post::select('id', 'post_title', 'post_category', 'status', 'author_id', 'created_at')->paginate(15);
+        $All_Post = Post::whereIn('status', ['published', 'pending', 'draft'])->paginate(15);
         $All_Category = Categories::select('id', 'category_name')->get();
         
         foreach($All_Post as $Post){
@@ -37,7 +37,7 @@ class AdminController extends Controller
     }
 
     public function Search_Post(Request $request){
-        $All_Post = Post::select('id', 'post_title', 'post_category', 'status', 'author_id', 'created_at')
+        $All_Post = Post::whereIn('status', ['published', 'pending', 'draft'])
                          ->where('post_title', 'like', "%{$request->search}%")->paginate(15);
         $All_Category = Categories::select('id', 'category_name')->get();
 
@@ -58,7 +58,7 @@ class AdminController extends Controller
     public function Post_Filter(Request $request){
 
         if($request->post_category == 'all' &&  $request->post_status == 'all'){
-            $All_Post = Post::select('id', 'post_title', 'post_category', 'status', 'author_id', 'created_at')->paginate(15);
+            $All_Post = Post::whereIn('status', ['published', 'pending', 'draft'])->paginate(15);
             $result_text = 'Search: All Categorys && Status | Total Posts';
         }
         else if ($request->post_category == 'all' &&  $request->post_status != 'all') {
@@ -75,7 +75,6 @@ class AdminController extends Controller
             $result_text = 'Search: '.$Category_Data->category_name.' & '.$request->post_status.' | Total Posts';
         }
 
-
         $All_Category = Categories::select('id', 'category_name')->get();
         
         foreach($All_Post as $Post){
@@ -90,6 +89,25 @@ class AdminController extends Controller
 
         $Post_Count = Post::count();
         return view('Backend.AllPostView', compact('All_Post', 'Post_Count', 'All_Category', 'result_text'));
+    }
+
+    public function Rejected_Post_View(){
+        $All_Post = Post::where('status', 'rejected')->paginate(15);
+        $All_Category = Categories::select('id', 'category_name')->get();
+        
+        foreach($All_Post as $Post){
+            $Category_Data = Categories::where('id', $Post->post_category)->first();
+            $Post->Category_Name = $Category_Data->category_name;
+        }
+
+        foreach($All_Post as $Post){
+            $User_Data = User::where('id', $Post->author_id)->first();
+            $Post->User_Name = $User_Data->name;
+        }
+
+        $Post_Count = Post::where('status', 'rejected')->count();
+        $result_text = "Rejected Posts";
+        return view('Backend.RejectedPostView', compact('All_Post', 'Post_Count', 'All_Category', 'result_text'));
     }
 
     public function Create_Post_View(){
@@ -120,6 +138,14 @@ class AdminController extends Controller
     public function Users_Post_Management_View(){
         $User_Post = Post::where('status', 'pending')->paginate(15);
         $User_Post_Count = Post::where('status', 'pending')->count();
+        $Search_Post_Count = $User_Post->count();
+        if($Search_Post_Count == 0){
+            $Search_Result = 'No Post Found';
+        }
+        else{
+            $Search_Result = '';
+        }
+        $Search_Word = 'Please Search';
         foreach($User_Post as $Post){
             $User_Data = User::where('id', $Post->author_id)->first();
             $Post->User_Name = $User_Data->name;
@@ -128,7 +154,59 @@ class AdminController extends Controller
             $Category_Data = Categories::where('id', $Post->post_category)->first();
             $Post->Category_Name = $Category_Data->category_name;
         }
-        return view('Backend.UsersPostManagementView', compact('User_Post', 'User_Post_Count'));
+        return view('Backend.UsersPostManagementView', compact('User_Post', 'User_Post_Count', 'Search_Post_Count', 'Search_Word', 'Search_Result'));
+    }
+
+    public function User_Post_Search(Request $request){
+        $User_Post = Post::where('status', 'pending')->where('post_title', 'like', "%{$request->search}%")->paginate(15);
+        $User_Post_Count = Post::where('status', 'pending')->count();
+        $Search_Post_Count = $User_Post->count();
+        if($Search_Post_Count == 0){
+            $Search_Result = 'No Post Found';
+        }
+        else{
+            $Search_Result = '';
+        }
+        $Search_Word = $request->search;
+        
+        foreach($User_Post as $Post){
+            $User_Data = User::where('id', $Post->author_id)->first();
+            $Post->User_Name = $User_Data->name;
+        }
+        foreach($User_Post as $Post){
+            $Category_Data = Categories::where('id', $Post->post_category)->first();
+            $Post->Category_Name = $Category_Data->category_name;
+        }
+
+        return view('Backend.UsersPostManagementView', compact('User_Post', 'User_Post_Count', 'Search_Post_Count', 'Search_Word', 'Search_Result'));
+    }
+
+    public function User_Post_Accept(Request $request, $id){
+        $Post = Post::findOrFail($id);
+        if(!$Post){
+            return redirect()->back()->with('error', 'Post Not Found');
+        }
+        $Post->status = 'published';
+        if($Post->update()){
+            return redirect()->back()->with('success', 'Post Accepted Successfuly!');
+        }
+        else{
+            return redirect()->back()->with('error', 'Post Accepted Failed!');
+        }
+    }
+
+    public function User_Post_Reject(Request $request, $id){
+        $Post = Post::findOrFail($id);
+        if(!$Post){
+            return redirect()->back()->with('error', 'Post Not Found');
+        }
+        $Post->status = 'Rejected';
+        if($Post->update()){
+            return redirect()->back()->with('success', 'Post Rejected Successfuly!');
+        }
+        else{
+            return redirect()->back()->with('error', 'Post Rejected Failed!');
+        }
     }
 
     public function Categories_Management_View(){

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('post_title');
             $table->string('post_category');
             $table->string('slug_url')->unique();
-            $table->enum('status', ['draft', 'pending', 'published'])->default('draft');
+            $table->enum('status', ['draft', 'pending', 'published', 'rejected'])->default('draft');
             $table->string('author_id');
             $table->string('img')->nullable();
             $table->text('post_description');

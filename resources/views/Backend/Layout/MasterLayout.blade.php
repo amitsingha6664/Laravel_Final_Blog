@@ -39,7 +39,13 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('All-Post-View') || request()->routeIs('Search-Post')  ? 'active' : '' }}" href="{{ route('All-Post-View') }}">
                         <i class="fas fa-file-alt"></i>
-                        <span class="nav-link-text">All Posts</span>
+                        <span class="nav-link-text">All Blog Posts</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('Rejected-Post-View') ? 'active' : '' }}" href="{{ route('Rejected-Post-View') }}">
+                        <i class="fa-solid fa-xmark"></i>
+                        <span class="nav-link-text">Rejected Posts</span>
                     </a>
                 </li>
                 <li class="nav-item">

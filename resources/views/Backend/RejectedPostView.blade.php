@@ -5,10 +5,10 @@
 <!-- Filters -->
 <div class="row mb-3">
     <div class="col-md-4">
-        <form action="{{ route('Search-Post') }}" method="get">
+        <form action="#" method="get">
             @csrf
             <div class="input-group mb-3">
-                <input type="text" name="search" class="form-control" value="{{ request('search') }}" placeholder="Search posts...">
+                <input type="text" name="search" class="form-control" value="" placeholder="Search posts...">
                 <button class="btn btn-outline-secondary" type="submit" name="submit">
                     <i class="fas fa-search"></i>
                 </button>
@@ -22,26 +22,6 @@
             </h6>
             <h3>{{$Post_Count}}</h3>
         </div>
-    </div>
-    <div class="col-md-4">
-        <form action="{{ route('Post-Filter') }}" method="GET">
-            @csrf
-            <div class="d-flex justify-content-md-end">
-                <select name="post_status" class="form-select form-select-sm me-2" style="width: auto;">
-                    <option value="all" selected>All Status</option>
-                    <option value="published">Published</option>
-                    <option value="draft">Draft</option>
-                    <option value="pending">Pending</option>
-                </select>
-                <select name="post_category" class="form-select form-select-sm me-2" style="width: auto;">
-                    <option value="all" selected>All Categories</option>
-                    @foreach($All_Category as $Category)
-                    <option value="{{$Category->id}}">{{$Category->category_name}}</option>
-                    @endforeach
-                </select>
-                <button type="submit" name="submit" class="btn btn-sm btn-outline-secondary">Filter</button>
-            </div>
-        </form>
     </div>
 </div>
 
