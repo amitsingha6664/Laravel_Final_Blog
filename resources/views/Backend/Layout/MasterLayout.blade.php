@@ -86,51 +86,10 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="sidebar-link nav-link" data-bs-toggle="collapse" href="#settingsCollapse" role="button" aria-expanded="false" aria-controls="settingsCollapse">
+                    <a class="nav-link" href="{{ route('Settings-View') }}">
                         <i class="fas fa-cog"></i>
                         <span class="nav-link-text">Settings</span>
-                        <span class="ms-auto"><i class="fas fa-chevron-down"></i></span>
                     </a>
-                    <div class="collapse" id="settingsCollapse">
-                        <ul class="nav flex-column ps-3">
-                            <li class="nav-item">
-                                <a href="{{ route('General-Settings-View') }}" class="nav-link">
-                                    <i class="fas fa-sliders-h"></i>
-                                    <span class="nav-link-text">General Settings</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('Appearance-Settings-View') }}" class="nav-link">
-                                    <i class="fas fa-paint-brush"></i>
-                                    <span class="nav-link-text">Appearance Settings</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('SEO-Settings-View') }}" class="nav-link">
-                                    <i class="fas fa-search"></i>
-                                    <span class="nav-link-text">SEO Settings</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('Social-Media-Settings-View') }}" class="nav-link">
-                                    <i class="fas fa-share-alt"></i>
-                                    <span class="nav-link-text">Social Media Settings</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('Email-Settings-View') }}" class="nav-link">
-                                    <i class="fas fa-envelope"></i>
-                                    <span class="nav-link-text">Email Settings</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('Advanced-Settings-View') }}" class="nav-link">
-                                    <i class="fas fa-cogs"></i>
-                                    <span class="nav-link-text">Advanced Settings</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
             </ul>
         </div>

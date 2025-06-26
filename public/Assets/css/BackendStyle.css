@@ -974,3 +974,204 @@ body {
     margin-bottom: 1rem;
     }
 }
+
+/* Settings Section */
+
+    /* General container for settings page */
+.settings-container {
+    background-color: #f8f9fa; /* Light background */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    max-width: 900px;
+    margin: 30px auto; /* Center the container */
+}
+
+/* Header section */
+.settings-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.settings-title {
+    font-size: 2.2rem;
+    color: #343a40;
+    margin-bottom: 10px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.settings-icon {
+    margin-right: 15px;
+    color: #007bff; /* Primary color */
+    font-size: 2.5rem;
+}
+
+.settings-description {
+    font-size: 1.1rem;
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+/* Sections for different setting categories */
+.settings-sections {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column layout for smaller screens */
+    gap: 30px; /* Space between sections */
+}
+
+@media (min-width: 768px) {
+    .settings-sections {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Two columns on larger screens */
+    }
+}
+
+.settings-section {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    padding: 25px;
+    border: 1px solid #e9ecef;
+}
+
+.section-title {
+    font-size: 1.6rem;
+    color: #007bff; /* Primary color for titles */
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #007bff;
+    text-align: center;
+}
+
+/* Form styling */
+.setting-form {
+    margin-bottom: 30px; /* Space between individual setting forms */
+}
+
+.form-group {
+    margin-bottom: 20px; /* Space between form elements */
+}
+
+.form-label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 8px;
+    display: block;
+    font-size: 1rem;
+}
+
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 10px 15px;
+    font-size: 1rem;
+    width: 100%;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.setting-save-btn {
+    background-color: #28a745; /* Success green */
+    border-color: #28a745;
+    padding: 10px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    width: auto; /* Make button size dynamic */
+    display: inline-block; /* Ensure it doesn't take full width */
+}
+
+.setting-save-btn:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+/* File Upload Styling */
+.file-upload-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.file-upload-label {
+    background-color: #007bff; /* Primary blue */
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    transition: background-color 0.2s ease-in-out;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.file-upload-label:hover {
+    background-color: #0056b3;
+}
+
+.file-upload-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.image-preview-container {
+    margin-top: 15px;
+    text-align: center;
+    border: 1px dashed #ced4da;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #fdfdfd;
+}
+
+.preview-image {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 5px;
+    object-fit: contain;
+    border: 1px solid #ddd;
+    padding: 5px;
+    background-color: #fff;
+    display: none; /* Hidden by default, shown by JS if image exists */
+    margin: 0 auto 10px auto;
+}
+
+.current-image-info, .no-image-info {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+/* Social Media Inputs */
+.social-input-group .input-group-text {
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-right: none;
+    color: #495057;
+    border-radius: 5px 0 0 5px;
+}
+
+.social-input-group .form-control {
+    border-left: none;
+    border-radius: 0 5px 5px 0;
+}
+
+.fas, .fab {
+    vertical-align: middle;
+}

@@ -45,9 +45,7 @@ Route::get('PostDelete/{id}', [AdminController::class, 'Post_Delete'])->name('Po
 /* Settings Routes */
 
 Route::get('ProfileView', [SettingsController::class, 'Profile_View'])->name('Profile-View');
-Route::get('GeneralSettingsView', [SettingsController::class, 'General_Settings_View'])->name('General-Settings-View');
-Route::get('AppearanceSettingsView', [SettingsController::class, 'Appearance_Settings_View'])->name('Appearance-Settings-View');
-Route::get('SEOSettingsView', [SettingsController::class, 'SEO_Settings_View'])->name('SEO-Settings-View');
-Route::get('SocialMediaSettingsView', [SettingsController::class, 'Social_Media_Settings_View'])->name('Social-Media-Settings-View');
-Route::get('EmailSettingsView', [SettingsController::class, 'Email_Settings_View'])->name('Email-Settings-View');
-Route::get('AdvancedSettingsView', [SettingsController::class, 'Advanced_Settings_View'])->name('Advanced-Settings-View');
+Route::get('SettingsView', [SettingsController::class, 'Settings_View'])->name('Settings-View');
+Route::get('SettingsEditView', [SettingsController::class, 'Settings_Edit_View'])->name('Settings-Edit-View');
+Route::post('SiteInformationUpdate', [SettingsController::class, 'Site_Information_Update'])->name('Site-Information-Update');
+Route::post('SocialMediaUpdate', [SettingsController::class, 'Social_Media_Update'])->name('Social-Media-Update');
