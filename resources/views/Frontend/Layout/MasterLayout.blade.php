@@ -35,7 +35,7 @@
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <a class="btn btn-login" href="{{ route('Dashboard-View') }}"><i class="fas fa-sign-in-alt me-1"></i> Login</a>
+                    <a class="btn btn-login" href="{{ route('Login') }}"><i class="fas fa-sign-in-alt me-1"></i> Login</a>
                 </div>
             </div>
         </div>

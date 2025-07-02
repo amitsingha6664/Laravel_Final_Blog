@@ -4,6 +4,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;  /* Connected Controllers */
 use App\Http\Controllers\AdminController;  /* Connected Controllers */
 use App\Http\Controllers\SettingsController;  /* Connected Controllers */
+use App\Http\Controllers\AuthenticationController;
+
+// Auth
+
+Route::get('Login', [AuthenticationController::class, 'Login'])->name('Login');
+Route::get('UserLogin', [AuthenticationController::class, 'User_Login'])->name('User-Login');
+
+Route::get('Registration', [AuthenticationController::class, 'Registration'])->name('Registration');
+Route::post('NewUserCreate', [AuthenticationController::class, 'New_User_Create'])->name('New-User-Create');
 
 /* Frontend Routes */
 
