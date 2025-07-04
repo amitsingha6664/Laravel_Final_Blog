@@ -9,7 +9,8 @@ use App\Http\Controllers\AuthenticationController;
 // Auth
 
 Route::get('Login', [AuthenticationController::class, 'Login'])->name('Login');
-Route::get('UserLogin', [AuthenticationController::class, 'User_Login'])->name('User-Login');
+Route::post('UserLogin', [AuthenticationController::class, 'User_Login'])->name('User-Login');
+Route::get('Logout', [AuthenticationController::class, 'Logout'])->name('Logout');
 
 Route::get('Registration', [AuthenticationController::class, 'Registration'])->name('Registration');
 Route::post('NewUserCreate', [AuthenticationController::class, 'New_User_Create'])->name('New-User-Create');

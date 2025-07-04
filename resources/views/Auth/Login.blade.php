@@ -170,7 +170,8 @@
 
     <div class="login-card text-center">
         <h2 class="mb-4">লগইন</h2>
-        <form action="#" method="">
+        <form action="{{ route('User-Login') }}" method="POST">
+            @csrf
             <div class="form-floating mb-3">
                 <input type="text" name="Phone_Number" class="form-control" id="username" placeholder=" ">
                 <label for="username">মোবাইল নাম্বার</label>
@@ -191,22 +192,5 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
-        // Optional: You can add JavaScript here for form validation or submission.
-        // For demonstration, a simple alert on successful login:
-        document.querySelector('.btn-login').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            if (username === 'test' && password === '123') {
-                alert('লগইন সফল হয়েছে!');
-                // In a real application, you would redirect the user or perform other actions.
-            } else {
-                alert('ভুল ইউজারনেম বা পাসওয়ার্ড।');
-            }
-        });
-    </script>
 </body>
 </html>

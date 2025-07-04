@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class AuthenticationController extends Controller
@@ -14,10 +15,20 @@ class AuthenticationController extends Controller
     }
 
     public function User_Login(Request $request){
-        $request->validate([
-        'Phone_Number' => 'required|email|unique:users',
-        'Password' => 'required|string|min:6|max:20|confirmed',
-    ]);
+        if(Auth::attempt(
+            ['phone_number'=> $request->Phone_Number, 'password'=> $request->Password]
+            )){
+            return redirect()->route('Dashboard-View')
+                             ->with('success', 'Login Successfuly!');
+        }
+        else{
+            return redirect()->back();
+        }
+    }
+
+    public function Logout(){
+        Auth::logout();
+        return redirect()->route('Home');
     }
 
     public function Registration(){
